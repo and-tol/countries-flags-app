@@ -1,3 +1,4 @@
+import { FC, ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Container } from './Container';
 
@@ -9,7 +10,11 @@ const Wrapper = styled.main`
   }
 `;
 
-export const Main = ({ children }) => {
+type PropsType = {
+  children?: ReactNode;
+};
+
+export const Main: FC<PropsType> = ({ children }): ReactElement => {
   return (
     <Wrapper>
       <Container>{children}</Container>

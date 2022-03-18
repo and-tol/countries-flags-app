@@ -1,4 +1,6 @@
+import { ComponentPropsWithoutRef, FC, Props, ReactElement } from 'react';
 import styled from 'styled-components';
+import { ICurrencyType, ILanguagesType } from '../types';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -86,7 +88,38 @@ const Tag = styled.span`
   cursor: pointer;
 `;
 
-export const Info = (props) => {
+type A = {
+  name: string;
+  nativeName: string;
+  flag: string;
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  topLevelDomain: string;
+  currencies: string[];
+  languages: string[];
+  borders: string[];
+  push: any;
+};
+
+type PropsType = {
+  children?: never;
+  name: string;
+  nativeName: string;
+  flag: string;
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  topLevelDomain: string[];
+  currencies: ICurrencyType[];
+  languages: ILanguagesType[];
+  borders: string[];
+  push: any;
+};
+
+export const Info: FC<PropsType> = (props): ReactElement => {
   const {
     name,
     nativeName,

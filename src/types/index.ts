@@ -25,3 +25,12 @@ export interface IInfoType {
   title: string;
   description: string;
 }
+
+export interface ICurrencyType {
+  code: string;
+  name: string;
+}
+
+export interface ILanguagesType {
+  name: string;
+}

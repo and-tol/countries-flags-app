@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import {useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { FC, ReactElement, useEffect } from 'react';
+import Link from 'next/link';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 
 import { Container } from './Container';
@@ -17,13 +17,12 @@ const Wrapper = styled.div`
   padding: 2rem 0;
 `;
 
-const Title = styled(Link).attrs({
-  to: '/',
-})`
+const Title = styled.a`
   color: var(--colors-text);
   font-size: var(--fs-sm);
   text-decoration: none;
   font-weight: var(--fw-bold);
+  cursor: pointer;
 `;
 
 const ModeSwitcher = styled.div`
@@ -34,7 +33,10 @@ const ModeSwitcher = styled.div`
   text-transform: capitalize;
 `;
 
-export const Header = () => {
+type PropsType = {
+  children?: never;
+};
+export const Header: FC<PropsType> = (): ReactElement => {
   const theme = 'light';
 
   useEffect(() => {
@@ -45,7 +47,9 @@ export const Header = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title>Where is the world?</Title>
+          <Link href="/">
+            <Title>Where is the world?</Title>
+          </Link>
           <ModeSwitcher>
             {theme === 'light' ? (
               <IoMoonOutline size="14px" />

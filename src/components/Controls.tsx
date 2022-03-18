@@ -5,12 +5,12 @@ import { Search } from './Search';
 import { CustomSelect } from './CustomSelect';
 
 const optionsMap = {
-  'Africa': { value: 'Africa', label: 'Africa' },
-  'America': { value: 'America', label: 'America' },
-  'Asia': { value: 'Asia', label: 'Asia' },
-  'Europe': { value: 'Europe', label: 'Europe' },
-  'Oceania': { value: 'Oceania', label: 'Oceania' },
-}
+  Africa: { value: 'Africa', label: 'Africa' },
+  America: { value: 'America', label: 'America' },
+  Asia: { value: 'Asia', label: 'Asia' },
+  Europe: { value: 'Europe', label: 'Europe' },
+  Oceania: { value: 'Oceania', label: 'Oceania' },
+};
 const options = Object.values(optionsMap);
 
 const Wrapper = styled.div`
@@ -26,8 +26,8 @@ const Wrapper = styled.div`
 `;
 
 type PropsType = {
-  children?:never
-}
+  children?: never;
+};
 
 export const Controls: FC<PropsType> = (): ReactElement => {
   return (
@@ -35,7 +35,7 @@ export const Controls: FC<PropsType> = (): ReactElement => {
       <Search />
       <CustomSelect
         options={options}
-        placeholder='Filter by Region'
+        placeholder="Filter by Region"
         isClearable
         isSearchable={false}
         value={''}

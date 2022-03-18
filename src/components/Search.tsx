@@ -40,7 +40,7 @@ export const Search: FC<PropsType> = ({ search, setSearch }): ReactElement => {
   return (
     <InputContainer>
       <IoSearch />
-      <Input onChange={e => setSearch(e.target.value)} value={search} />
+      <Input onChange={(e) => setSearch(e.target.value)} value={search} />
     </InputContainer>
   );
 };

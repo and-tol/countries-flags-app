@@ -23,7 +23,7 @@ const Wrapper = styled.section`
 `;
 
 type PropsType = {
-  childre?: ReactNode;
+  children?: ReactNode;
 };
 
 export const List: FC<PropsType> = ({ children }): ReactElement => {

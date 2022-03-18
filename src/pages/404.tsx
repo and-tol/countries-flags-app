@@ -8,7 +8,7 @@ const NotFoundPage: NextPage = (): ReactElement => {
       <Head>
         <title>Flags - Page Not Found</title>
       </Head>
-      <div>This page doesn't exist</div>
+      <div>This page doesn&apos;t exist</div>
     </>
   );
 };
