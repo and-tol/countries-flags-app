@@ -14,7 +14,6 @@
     "prepare": "husky install"
   },
 
-
   "dependencies": {
     "axios": "^0.26.1",
     "lodash.throttle": "^4.1.1",
