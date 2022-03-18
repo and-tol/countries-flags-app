@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint ./src --fix",
-    "precommit": "lint-staged",
+    "pre-commit": "lint-staged",
     "prettier": "prettier --check src",
     "prettier:fix": "prettier --write src",
     "prepare": "husky install"
@@ -18,7 +18,7 @@
       "pre-commit": "lint-staged"
     }
   },
- 
+
   "dependencies": {
     "axios": "^0.26.1",
     "lodash.throttle": "^4.1.1",
