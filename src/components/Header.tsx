@@ -47,7 +47,7 @@ export const Header: FC<PropsType> = (): ReactElement => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Link href="/">
+          <Link href="/" passHref>
             <Title>Where is the world?</Title>
           </Link>
           <ModeSwitcher>
