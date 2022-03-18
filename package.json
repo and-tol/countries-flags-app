@@ -13,7 +13,11 @@
     "prettier:fix": "prettier --write src",
     "prepare": "husky install"
   },
-
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "axios": "^0.26.1",
     "lodash.throttle": "^4.1.1",
