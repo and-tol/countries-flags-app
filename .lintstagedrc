@@ -4,6 +4,7 @@
     "prettier --write"
   ],
   "**/*.{scss,css}": [
-    "prettier --write"
+    "prettier --write",
+    "git add"
   ]
 }
