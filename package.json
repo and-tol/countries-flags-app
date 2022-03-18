@@ -18,12 +18,7 @@
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "lint:fix",
-      "prettier:fix"
-    ]
-  },
+ 
   "dependencies": {
     "axios": "^0.26.1",
     "lodash.throttle": "^4.1.1",
