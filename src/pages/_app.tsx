@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { wrapper } from '../init/store';
 
 import { AppView } from '../views/app';
 
@@ -12,4 +13,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

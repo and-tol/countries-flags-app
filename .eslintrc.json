@@ -21,7 +21,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "plugins": [
     "prefer-arrow",
@@ -63,7 +63,7 @@
     ],
     "react/jsx-equals-spacing": [
       "error",
-      "always"
+      "never"
     ],
     "react/jsx-indent": [
       "warn",
@@ -108,8 +108,26 @@
         "tsx": "never"
       }
     ],
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true
+      }
+    ],
+    "react/jsx-curly-spacing": [
+      "warn",
+      {
+        "when": "never",
+        "children": {
+          "when": "always"
+        }
+      }
+    ],
     "react/no-array-index-key": "off",
     "jsx-a11y/interactive-supports-focus": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off"
   }
 }

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, Props, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 import { ICurrencyType, ILanguagesType } from '../types';
 
@@ -87,21 +87,6 @@ const Tag = styled.span`
   line-height: 1.5;
   cursor: pointer;
 `;
-
-type A = {
-  name: string;
-  nativeName: string;
-  flag: string;
-  capital: string;
-  population: number;
-  region: string;
-  subregion: string;
-  topLevelDomain: string;
-  currencies: string[];
-  languages: string[];
-  borders: string[];
-  push: any;
-};
 
 type PropsType = {
   children?: never;

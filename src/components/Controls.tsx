@@ -32,10 +32,10 @@ type PropsType = {
 export const Controls: FC<PropsType> = (): ReactElement => {
   return (
     <Wrapper>
-      <Search />
+      <Search setSearch={() => {}} />
       <CustomSelect
         options={options}
-        placeholder="Filter by Region"
+        placeholder='Filter by Region'
         isClearable
         isSearchable={false}
         value={''}

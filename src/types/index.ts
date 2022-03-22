@@ -34,3 +34,9 @@ export interface ICurrencyType {
 export interface ILanguagesType {
   name: string;
 }
+
+export interface ISelectCountriesInfo {
+  status: string;
+  error?: string | null;
+  gty: number;
+}
