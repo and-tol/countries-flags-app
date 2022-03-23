@@ -1,9 +1,8 @@
 import { NextPage } from 'next';
-import { ReactElement } from 'react';
-import { useRouter } from 'next/router';
-import { IoArrowBack } from 'react-icons/io5';
 import Head from 'next/head';
-
+import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
+import { IoArrowBack } from 'react-icons/io5';
 import { Button } from '../components/Button';
 import { Info } from '../components/Info';
 

@@ -1,9 +1,21 @@
 import { rootReducer, AppState } from './root-reducer';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { createStore, applyMiddleware, Store, Middleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import {
+  createStore,
+  applyMiddleware,
+  Store,
+  Middleware,
+  AnyAction,
+} from 'redux';
+import thunkMiddleware, { ThunkMiddleware, ThunkAction } from 'redux-thunk';
 import { createWrapper, Context } from 'next-redux-wrapper';
 import axios from 'axios';
+
+declare module 'redux' {
+  interface Dispatch<A extends Action = AnyAction> {
+    <S, E, R>(asyncAction: ThunkAction<R, S, E, A>): R;
+  }
+}
 
 import * as api from '../config';
 
@@ -57,6 +69,7 @@ const bindMiddleware = (middleware: Middleware[]) => {
 // }
 
 // create a makeStore function
+
 const makeStore = (context: Context) =>
   createStore(
     rootReducer,
@@ -65,3 +78,6 @@ const makeStore = (context: Context) =>
 
 export const wrapper = createWrapper<Store<AppState>>(makeStore);
 // export const wrapper = createWrapper<Store<AppState>>(initializeStore);
+
+// export type InitializedStore = ReturnType<typeof initializeStore>;
+// export type AppDispatch = typeof store.dispatch;

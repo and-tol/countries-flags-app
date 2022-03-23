@@ -1,8 +1,9 @@
+import { HYDRATE } from 'next-redux-wrapper';
 import { ICountriesType } from '../../types';
 import { IAction } from '../../types/commonTypes';
 import { countriesType } from './countries-types';
 
-enum STATUS {
+export enum STATUS {
   idle = 'idle',
   loading = 'loading',
   received = 'received',
@@ -25,9 +26,22 @@ const initialState: IInitialStateCountriesReducer = {
 
 export const countriesReducer = (
   state: IInitialStateCountriesReducer = initialState,
-  { type, payload }: IAction<string>
-) => {
-  switch (type) {
+  action: IAction<any>
+): any => {
+  switch (action.type) {
+    case HYDRATE: {
+      const nextState = {
+        ...state, // use previous state
+        list: action.payload.countries.list, // apply delta from hydration
+      };
+      if (state.list.length !== 0) {
+        nextState.list = state.list;
+        nextState.status = STATUS.received;
+      }
+
+      return nextState;
+    }
+
     case countriesType.SET_LOADING:
       return {
         ...state,
@@ -38,14 +52,15 @@ export const countriesReducer = (
       return {
         ...state,
         status: STATUS.rejected,
-        error: payload,
+        error: action.payload,
       };
-    case countriesType.SET_COUNTRIES:
+    case countriesType.SET_COUNTRIES: {
       return {
         ...state,
         status: STATUS.received,
-        list: payload,
+        list: action.payload,
       };
+    }
 
     default:
       return state;
