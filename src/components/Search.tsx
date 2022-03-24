@@ -1,6 +1,15 @@
-import { FC, ReactElement } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  ReactElement,
+  SyntheticEvent,
+} from 'react';
 import { IoSearch } from 'react-icons/io5';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSearch } from '../bus/controls/controls-selectors';
+import { setSearch } from '../bus/controls/controls-action';
 
 const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
@@ -32,15 +41,19 @@ const Input = styled.input.attrs({
 
 type PropsType = {
   children?: never;
-  search?: string;
-  setSearch: (value: string) => void;
 };
 
-export const Search: FC<PropsType> = ({ search, setSearch }): ReactElement => {
+export const Search: FC<PropsType> = (): ReactElement => {
+  const dispatch = useDispatch();
+  const search = useSelector(selectSearch);
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setSearch(e.target.value));
+  };
+
   return (
     <InputContainer>
       <IoSearch />
-      <Input onChange={(e) => setSearch(e.target.value)} value={search} />
+      <Input onChange={handleSearch} value={search} />
     </InputContainer>
   );
 };

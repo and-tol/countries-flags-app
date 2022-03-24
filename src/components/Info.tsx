@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 import { ICurrencyType, ILanguagesType } from '../types';
@@ -101,7 +102,7 @@ type PropsType = {
   currencies: ICurrencyType[];
   languages: ILanguagesType[];
   borders: string[];
-  push: any;
+  // push: any;
 };
 
 export const Info: FC<PropsType> = (props): ReactElement => {
@@ -117,8 +118,10 @@ export const Info: FC<PropsType> = (props): ReactElement => {
     currencies = [],
     languages = [],
     borders = [],
-    push,
+    // push,
   } = props;
+
+  const { push } = useRouter();
 
   return (
     <Wrapper>

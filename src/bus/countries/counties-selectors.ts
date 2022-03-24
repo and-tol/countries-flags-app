@@ -11,3 +11,12 @@ export const selectCountriesInfo = (
 
 export const selectAllCountries = (state: RootState): ICountriesType[] =>
   state.countries.list;
+
+export const selectVisibleCountries = (
+  state: RootState,
+  { search = '' }: { search: string }
+): ICountriesType[] => {
+  return state.countries.list.filter((country: ICountriesType) =>
+    country.name.toLowerCase().includes(search.toLowerCase())
+  );
+};

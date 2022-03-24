@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { ReactElement, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch, connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Controls } from '../components/Controls';
 import { List } from '../components/List';
@@ -10,13 +10,15 @@ import { Card } from '../components/Card';
 
 import { ICountriesType, ICountryInfoType } from '../types';
 import {
-  selectAllCountries,
   selectCountriesInfo,
+  selectVisibleCountries,
 } from '../bus/countries/counties-selectors';
 import { countriesActions } from '../bus/countries/countries-action';
 import { STATUS } from '../bus/countries/countries-reducer';
+
+import { selectSearch } from '../bus/controls/controls-selectors';
+import { RootState } from '../init/root-reducer';
 import { wrapper } from '../init/store';
-import { AppState } from '../init/root-reducer';
 
 type PropsType = {
   children?: never;
@@ -26,10 +28,11 @@ const HomePage: NextPage = (): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const countries: ICountriesType[] = useSelector(selectAllCountries);
+  const search = useSelector(selectSearch);
+  const countries = useSelector((state: RootState) =>
+    selectVisibleCountries(state, { search })
+  );
   const { status, error, gty } = useSelector(selectCountriesInfo);
-  console.log('countries >>', countries);
-  console.log('status >>', status);
 
   useEffect(() => {
     if (!gty) {
