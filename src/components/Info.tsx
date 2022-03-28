@@ -129,7 +129,7 @@ export const Info: FC<PropsType> = (props): ReactElement => {
   console.log(name);
 
   useEffect(() => {
-    if (Boolean(borders.length)) {
+    if (borders.length) {
       dispatch(detailsActions.loadNeighborsByBorders(borders));
     }
   }, [borders, dispatch]);

@@ -32,7 +32,7 @@ export const detailsActions = Object.freeze({
     (name: string | string[] | undefined) =>
     async (
       dispatch: Dispatch<IAction<string>>,
-      _: any,
+      _: unknown,
       { client, api }: { client: AxiosStatic; api: IApiType }
     ) => {
       dispatch(detailsActions.setLoading());
@@ -64,7 +64,7 @@ export const detailsActions = Object.freeze({
     (codes: string[]) =>
     async (
       dispatch: Dispatch<IAction<string[] | string>>,
-      _: any,
+      _: unknown,
       { client, api }: { client: AxiosStatic; api: IApiType }
     ) => {
       dispatch(detailsActions.setLoading());

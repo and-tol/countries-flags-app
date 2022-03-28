@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "./node_modules/.bin/eslint src --fix ",
+    "lint:fix": "eslint ./src --fix",
     "pre-commit": "lint-staged",
     "prettier": "prettier --check src",
     "prettier:fix": "prettier --write src",
