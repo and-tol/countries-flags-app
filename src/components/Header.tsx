@@ -7,6 +7,8 @@ import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import { Container } from './Container';
 import { AppState } from '../init/root-reducer';
 import { setTheme } from '../bus/theme/theme-actions';
+import { controlsActions } from '../bus/controls/controls-actions';
+import { IAction } from '../types/commonTypes';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -45,6 +47,8 @@ export const Header: FC<PropsType> = (): ReactElement => {
   const toggleTheme = () =>
     dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
 
+  const cleanUp = (): IAction<any> => dispatch(controlsActions.clearControls());
+
   useEffect(() => {
     if (theme) {
       document.body.setAttribute('data-theme', theme);
@@ -56,7 +60,7 @@ export const Header: FC<PropsType> = (): ReactElement => {
       <Container>
         <Wrapper>
           <Link href='/' passHref>
-            <Title>Where is the world?</Title>
+            <Title onClick={cleanUp}>Where is the world?</Title>
           </Link>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' ? (

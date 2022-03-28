@@ -1,29 +1,42 @@
 import { useRouter } from 'next/router';
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
+import { detailsActions } from '../../bus/details/details-actions';
+import { selectDetails } from '../../bus/details/details-selectors';
 import { Button } from '../../components/Button';
 import { Info } from '../../components/Info';
+import { STATUS } from '../../types';
 
 type PropsType = {
   children?: never;
 };
 
-const CountryPage: FC<PropsType> = (): ReactElement => {
+const DetailsPage: FC<PropsType> = (): ReactElement => {
   const router = useRouter();
-  //  const { name } = useParams();
-  console.log(router);
+  const dispatch = useDispatch();
 
-  // const currentCountry = null;
-  const currentCountry = router.query.name;
+  // const currentCountry = router.query.name;
+  const { currentCountry, error, status } = useSelector(selectDetails);
+
+  useEffect(() => {
+    dispatch(detailsActions.loadCountryByName(router.query.name));
+
+    return () => {
+      dispatch(detailsActions.clearDetails());
+    };
+  }, [router.query.name, dispatch]);
 
   return (
     <div>
       <Button onClick={() => router.back()}>
         <IoArrowBack /> Back
       </Button>
-      {currentCountry && <Info /* push={router.push} */ {...currentCountry} />}
+      {status === STATUS.loading && <h2>Loading...</h2>}
+      {error === STATUS.rejected && <h2>{error}</h2>}
+      {currentCountry && <Info {...currentCountry} />}
     </div>
   );
 };
 
-export default CountryPage;
+export default DetailsPage;

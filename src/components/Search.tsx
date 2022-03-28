@@ -9,7 +9,7 @@ import { IoSearch } from 'react-icons/io5';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSearch } from '../bus/controls/controls-selectors';
-import { setSearch } from '../bus/controls/controls-action';
+import { controlsActions } from '../bus/controls/controls-actions';
 
 const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
@@ -47,7 +47,7 @@ export const Search: FC<PropsType> = (): ReactElement => {
   const dispatch = useDispatch();
   const search = useSelector(selectSearch);
   const handleSearch = (e: ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setSearch(e.target.value));
+    dispatch(controlsActions.setSearch(e.target.value));
   };
 
   return (

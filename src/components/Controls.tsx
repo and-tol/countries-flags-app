@@ -1,10 +1,14 @@
 import { FC, ReactElement } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Search } from './Search';
 import { CustomSelect } from './CustomSelect';
+import { selectRegion } from '../bus/controls/controls-selectors';
+import { controlsActions } from '../bus/controls/controls-actions';
+import { IOptionsMapType, OptionMapValueType } from '../types';
 
-const optionsMap = {
+const optionsMap: IOptionsMapType = {
   Africa: { value: 'Africa', label: 'Africa' },
   America: { value: 'America', label: 'America' },
   Asia: { value: 'Asia', label: 'Asia' },
@@ -30,16 +34,26 @@ type PropsType = {
 };
 
 export const Controls: FC<PropsType> = (): ReactElement => {
+  const dispatch = useDispatch();
+  const region = useSelector(selectRegion);
+
+  console.log(region);
+  console.log('optionsMap[region]', optionsMap[region]);
+
+  const handleSelect = (reg: OptionMapValueType): void => {
+    dispatch(controlsActions.setRegion(reg?.value ?? ''));
+  };
+
   return (
     <Wrapper>
-      <Search setSearch={() => null} />
+      <Search />
       <CustomSelect
         options={options}
         placeholder='Filter by Region'
         isClearable
         isSearchable={false}
-        value={''}
-        onChange={() => null}
+        value={optionsMap[region]}
+        onChange={(reg): void => handleSelect(reg as OptionMapValueType)}
       />
     </Wrapper>
   );

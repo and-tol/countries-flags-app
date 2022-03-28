@@ -1,14 +1,7 @@
 import { HYDRATE } from 'next-redux-wrapper';
-import { ICountriesType } from '../../types';
+import { ICountriesType, STATUS } from '../../types';
 import { IAction } from '../../types/commonTypes';
 import { countriesType } from './countries-types';
-
-export enum STATUS {
-  idle = 'idle',
-  loading = 'loading',
-  received = 'received',
-  rejected = 'rejected',
-}
 
 export interface IInitialStateCountriesReducer {
   // status: 'idle' | 'loading' | 'received' | 'rejected';

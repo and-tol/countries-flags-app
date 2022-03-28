@@ -14,9 +14,11 @@ export const selectAllCountries = (state: RootState): ICountriesType[] =>
 
 export const selectVisibleCountries = (
   state: RootState,
-  { search = '' }: { search: string }
+  { search = '', region = '' }: { search: string; region: string }
 ): ICountriesType[] => {
-  return state.countries.list.filter((country: ICountriesType) =>
-    country.name.toLowerCase().includes(search.toLowerCase())
+  return state.countries.list.filter(
+    (country: ICountriesType) =>
+      country.name.toLowerCase().includes(search.toLowerCase()) &&
+      country.region.includes(region)
   );
 };

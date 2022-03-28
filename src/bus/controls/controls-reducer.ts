@@ -21,6 +21,13 @@ export const controlsReducer = (
         ...state,
         search: action.payload,
       };
+    case controlsType.SET_REGION:
+      return {
+        ...state,
+        region: action.payload,
+      };
+    case controlsType.CLEAR_CONTROLS:
+      return initialState;
 
     default:
       return state;

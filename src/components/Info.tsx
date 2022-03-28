@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router';
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ICurrencyType, ILanguagesType } from '../types';
+import { selectNeighbors } from '../bus/details/details-selectors';
+import { detailsActions } from '../bus/details/details-actions';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -102,7 +106,6 @@ type PropsType = {
   currencies: ICurrencyType[];
   languages: ILanguagesType[];
   borders: string[];
-  // push: any;
 };
 
 export const Info: FC<PropsType> = (props): ReactElement => {
@@ -118,10 +121,18 @@ export const Info: FC<PropsType> = (props): ReactElement => {
     currencies = [],
     languages = [],
     borders = [],
-    // push,
   } = props;
-
   const { push } = useRouter();
+  const dispatch = useDispatch();
+  const neighbors = useSelector(selectNeighbors);
+
+  console.log(name);
+
+  useEffect(() => {
+    if (Boolean(borders.length)) {
+      dispatch(detailsActions.loadNeighborsByBorders(borders));
+    }
+  }, [borders, dispatch]);
 
   return (
     <Wrapper>
@@ -150,7 +161,7 @@ export const Info: FC<PropsType> = (props): ReactElement => {
           <List>
             <ListItem>
               <b>Top Level Domain</b>{' '}
-              {topLevelDomain.map((d) => (
+              {topLevelDomain?.map((d) => (
                 <span key={d}>{d}</span>
               ))}
             </ListItem>
@@ -174,9 +185,12 @@ export const Info: FC<PropsType> = (props): ReactElement => {
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {[].map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
-                  {b}
+              {neighbors.map((countryName) => (
+                <Tag
+                  key={countryName}
+                  onClick={() => push(`/country/${countryName}`)}
+                >
+                  {countryName}
                 </Tag>
               ))}
             </TagGroup>

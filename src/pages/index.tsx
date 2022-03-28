@@ -8,15 +8,14 @@ import { Controls } from '../components/Controls';
 import { List } from '../components/List';
 import { Card } from '../components/Card';
 
-import { ICountriesType, ICountryInfoType } from '../types';
+import { ICountriesType, ICountryInfoType, STATUS } from '../types';
 import {
   selectCountriesInfo,
   selectVisibleCountries,
 } from '../bus/countries/counties-selectors';
-import { countriesActions } from '../bus/countries/countries-action';
-import { STATUS } from '../bus/countries/countries-reducer';
+import { countriesActions } from '../bus/countries/countries-actions';
 
-import { selectSearch } from '../bus/controls/controls-selectors';
+import { selectControls } from '../bus/controls/controls-selectors';
 import { RootState } from '../init/root-reducer';
 import { wrapper } from '../init/store';
 
@@ -28,9 +27,9 @@ const HomePage: NextPage = (): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const search = useSelector(selectSearch);
+  const { search, region } = useSelector(selectControls);
   const countries = useSelector((state: RootState) =>
-    selectVisibleCountries(state, { search })
+    selectVisibleCountries(state, { search, region })
   );
   const { status, error, gty } = useSelector(selectCountriesInfo);
 
