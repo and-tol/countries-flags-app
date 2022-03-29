@@ -23,10 +23,9 @@ import { setTheme } from '../bus/theme/theme-actions';
 
 type PropsType = {
   children?: never;
-  initCountries: any[];
 };
 
-const HomePage: NextPage<PropsType> = (props): ReactElement => {
+const HomePage: NextPage<PropsType> = (): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -108,7 +107,7 @@ export const getServerSideProps: GetServerSideProps<PropsType> =
     ]);
 
     return {
-      props: { initCountries: store.getState().countries },
+      props: {},
     };
   });
 
