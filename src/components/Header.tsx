@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FC, ReactElement, useEffect } from 'react';
 import Link from 'next/link';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import nookies, { setCookie } from 'nookies';
 
 import { Container } from './Container';
 import { AppState } from '../init/root-reducer';
@@ -44,14 +45,16 @@ export const Header: FC<PropsType> = (): ReactElement => {
   const dispatch = useDispatch();
   const theme = useSelector((state: AppState) => state.theme);
 
-  const toggleTheme = () =>
+  const toggleTheme = () => {
     dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
+  };
 
   const cleanUp = (): IAction<any> => dispatch(controlsActions.clearControls());
 
   useEffect(() => {
     if (theme) {
       document.body.setAttribute('data-theme', theme);
+      nookies.set(null, 'theme', theme, { maxAge: 300 * 24 * 60 * 60 });
     }
   }, [theme]);
 

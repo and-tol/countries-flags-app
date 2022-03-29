@@ -37,9 +37,6 @@ export const Controls: FC<PropsType> = (): ReactElement => {
   const dispatch = useDispatch();
   const region = useSelector(selectRegion);
 
-  console.log(region);
-  console.log('optionsMap[region]', optionsMap[region]);
-
   const handleSelect = (reg: OptionMapValueType): void => {
     dispatch(controlsActions.setRegion(reg?.value ?? ''));
   };
