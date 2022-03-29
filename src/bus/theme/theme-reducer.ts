@@ -2,18 +2,16 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { IAction } from '../../types/commonTypes';
 import { themeTypes } from './theme-types';
 
-const initialState = 'light';
+const initialState: string = 'light';
 
-export const themeReducer = (
-  state = initialState,
-  { type, payload }: IAction<string>
-) => {
-  switch (type) {
-    case HYDRATE:
-      return state;
+export const themeReducer = (state = initialState, action: IAction<any>) => {
+  switch (action.type) {
+    case HYDRATE: {
+      return action.payload?.theme;
+    }
 
     case themeTypes.SET_THEME:
-      return payload;
+      return action.payload;
 
     default:
       return state;

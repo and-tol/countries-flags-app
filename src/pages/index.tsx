@@ -3,6 +3,7 @@ import { ReactElement, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
+import nookies from 'nookies';
 
 import { Controls } from '../components/Controls';
 import { List } from '../components/List';
@@ -18,6 +19,7 @@ import { countriesActions } from '../bus/countries/countries-actions';
 import { selectControls } from '../bus/controls/controls-selectors';
 import { RootState } from '../init/root-reducer';
 import { wrapper } from '../init/store';
+import { setTheme } from '../bus/theme/theme-actions';
 
 type PropsType = {
   children?: never;
@@ -87,16 +89,22 @@ const HomePage: NextPage = (): ReactElement => {
 };
 
 export const getServerSideProps: GetServerSideProps<PropsType> =
-  wrapper.getServerSideProps((store) => async () => {
+  wrapper.getServerSideProps((store) => async (context) => {
     console.log(
       'store state on the server before dispatch >>>>',
-      store.getState().countries.list[0]
+      // store.getState().countries.list[0]
+      store.getState().theme
     );
+    const cookies = nookies.get(context);
+    if (cookies.theme) {
+      await store.dispatch(setTheme(cookies.theme));
+    }
 
     await store.dispatch(countriesActions.loadCountriesNormal());
 
     console.log('store state on the server after dispatch >>>>', [
-      store.getState().countries.list[0],
+      // store.getState().countries.list[0],
+      store.getState().theme,
     ]);
 
     return {
