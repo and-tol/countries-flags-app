@@ -17,7 +17,7 @@ declare module 'redux' {
   }
 }
 
-import * as api from '../config';
+import * as api from '../api';
 
 let store: Store | undefined;
 

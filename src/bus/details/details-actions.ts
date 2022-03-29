@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosStatic } from 'axios';
 import { Dispatch } from 'redux';
-import { api, IApiType } from '../../config';
+import { api, IApiType } from '../../api';
 import { ICodesType } from '../../types';
 
 import { IAction } from '../../types/commonTypes';

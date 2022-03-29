@@ -26,6 +26,7 @@ export const countriesReducer = (
       const nextState = {
         ...state, // use previous state
         list: action.payload.countries.list, // apply delta from hydration
+        status: STATUS.received,
       };
       if (state.list.length !== 0) {
         nextState.list = state.list;

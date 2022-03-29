@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  ReactElement,
-  SyntheticEvent,
-} from 'react';
+import { ChangeEvent, FC, ReactElement } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';

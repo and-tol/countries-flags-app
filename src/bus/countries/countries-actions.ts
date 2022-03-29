@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { ALL_COUNTRIES, ApiType } from '../../config';
+import { IApiType, api } from '../../api';
 import { ICountriesType } from '../../types';
 import { IAction } from '../../types/commonTypes';
 import { countriesType } from './countries-types';
@@ -29,7 +29,7 @@ export const countriesActions = Object.freeze({
     (
       dispatch: Dispatch<IAction<ICountriesType[] | string | boolean>>,
       _: unknown,
-      { client, api }: { client: AxiosStatic; api: ApiType }
+      { client, api }: { client: AxiosStatic; api: IApiType }
     ) => {
       dispatch(countriesActions.setLoading());
 
@@ -54,7 +54,7 @@ export const countriesActions = Object.freeze({
     ) => {
       dispatch(countriesActions.setLoading());
 
-      const response = await axios.get<ICountriesType[]>(ALL_COUNTRIES);
+      const response = await axios.get<ICountriesType[]>(api.ALL_COUNTRIES);
 
       if (response.status === 200) {
         dispatch(countriesActions.setCountries(response.data));

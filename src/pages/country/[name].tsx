@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FC, ReactElement, useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
@@ -15,8 +16,6 @@ type PropsType = {
 const DetailsPage: FC<PropsType> = (): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  // const currentCountry = router.query.name;
   const { currentCountry, error, status } = useSelector(selectDetails);
 
   useEffect(() => {
@@ -28,14 +27,20 @@ const DetailsPage: FC<PropsType> = (): ReactElement => {
   }, [router.query.name, dispatch]);
 
   return (
-    <div>
-      <Button onClick={() => router.back()}>
-        <IoArrowBack /> Back
-      </Button>
-      {status === STATUS.loading && <h2>Loading...</h2>}
-      {error === STATUS.rejected && <h2>{error}</h2>}
-      {currentCountry && <Info {...currentCountry} />}
-    </div>
+    <>
+      <Head>
+        <title>Flags - Details</title>
+      </Head>
+
+      <div>
+        <Button onClick={() => router.back()}>
+          <IoArrowBack /> Back
+        </Button>
+        {status === STATUS.loading && <h2>Loading...</h2>}
+        {error === STATUS.rejected && <h2>{error}</h2>}
+        {currentCountry && <Info {...currentCountry} />}
+      </div>
+    </>
   );
 };
 

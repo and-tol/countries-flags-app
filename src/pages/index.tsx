@@ -23,9 +23,10 @@ import { setTheme } from '../bus/theme/theme-actions';
 
 type PropsType = {
   children?: never;
+  initCountries: any[];
 };
 
-const HomePage: NextPage = (): ReactElement => {
+const HomePage: NextPage<PropsType> = (props): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -37,14 +38,14 @@ const HomePage: NextPage = (): ReactElement => {
 
   useEffect(() => {
     if (!gty) {
-      dispatch(countriesActions.loadCountries());
+      dispatch(countriesActions.loadCountriesNormal());
     }
   }, [gty, dispatch]);
 
   return (
     <>
       <Head>
-        <title>Flags</title>
+        <title>Countries Flags</title>
       </Head>
       <Controls />
 
@@ -54,7 +55,7 @@ const HomePage: NextPage = (): ReactElement => {
 
       {status === STATUS.received && (
         <List>
-          {countries?.map((c: ICountriesType): ReactElement => {
+          {countries.map((c: ICountriesType): ReactElement => {
             const countryInfo: ICountryInfoType = {
               img: c.flags.png,
               name: c.name,
@@ -92,23 +93,22 @@ export const getServerSideProps: GetServerSideProps<PropsType> =
   wrapper.getServerSideProps((store) => async (context) => {
     console.log(
       'store state on the server before dispatch >>>>',
-      // store.getState().countries.list[0]
-      store.getState().theme
+      store.getState().countries.list[0]
+      // store.getState().theme
     );
     const cookies = nookies.get(context);
     if (cookies.theme) {
       await store.dispatch(setTheme(cookies.theme));
     }
-
     await store.dispatch(countriesActions.loadCountriesNormal());
 
     console.log('store state on the server after dispatch >>>>', [
-      // store.getState().countries.list[0],
-      store.getState().theme,
+      store.getState().countries.list[0],
+      // store.getState().theme,
     ]);
 
     return {
-      props: {},
+      props: { initCountries: store.getState().countries },
     };
   });
 

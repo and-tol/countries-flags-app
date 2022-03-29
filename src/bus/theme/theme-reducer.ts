@@ -2,7 +2,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { IAction } from '../../types/commonTypes';
 import { themeTypes } from './theme-types';
 
-const initialState: string = 'light';
+const initialState = 'light';
 
 export const themeReducer = (state = initialState, action: IAction<any>) => {
   switch (action.type) {
