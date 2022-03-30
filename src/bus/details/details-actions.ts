@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosStatic } from 'axios';
 import { Dispatch } from 'redux';
-import { api, IApiType } from '../../api';
+import { api, filterByCode, IApiType, searchByCountry } from '../../api';
 import { ICodesType } from '../../types';
 
 import { IAction } from '../../types/commonTypes';
@@ -36,9 +36,9 @@ export const detailsActions = Object.freeze({
       { client, api }: { client: AxiosStatic; api: IApiType }
     ) => {
       dispatch(detailsActions.setLoading());
-
+      const url = searchByCountry(name);
       client
-        .get<string>(api.searchByCountry(name))
+        .get(url)
         .then(({ data }) => dispatch(detailsActions.setCountry(data[0])))
         .catch((err: Error | AxiosError) => {
           if (axios.isAxiosError(err)) {
@@ -70,7 +70,7 @@ export const detailsActions = Object.freeze({
       dispatch(detailsActions.setLoading());
 
       client
-        .get<ICodesType[]>(api.filterByCode(codes))
+        .get<ICodesType[]>(filterByCode(codes))
         .then(({ data }) =>
           dispatch(detailsActions.setNeighbors(data.map((c) => c.name)))
         )
